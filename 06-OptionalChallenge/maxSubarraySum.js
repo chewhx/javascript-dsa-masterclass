@@ -9,11 +9,17 @@ function maxSubarraySum(array, number) {
   // set two variables currentMax, sumOf
   let currentMax = 0;
   let sumOf = 0;
-  // while b is less than array length, find the sum of numbers at [a] and [b]
+  // while b is less than array length
   while (b < array.length && a < b) {
-    sumOf = array[a] + array[b];
+    // set sumOf to zero
+    sumOf = 0;
+    // iterate for 'number' of elements by for loop through a to b
+    for (let i = a; i <= b; i++) {
+      // get sum of all elements from at index a to b of array
+      sumOf += array[i];
+    }
     // if sumOf > currentMax, set currentMax to sumOf
-    if (sumOf > currentMax) currentMax = sumOf;
+    currentMax = Math.max(currentMax, sumOf);
     a++;
     b++;
   }

@@ -38,27 +38,90 @@ class Graph {
   }
 
   // recursive
+  // DFS(vertex) {
+  //   let list = this.adjacencyList;
+  //   // create a list to store end result
+  //   let results = [];
+  //   // create an object to store visited articles
+  //   let visited = {};
+  //   // helper function
+  //   function helper(vertex) {
+  //     // if vertex is empty, return
+  //     if (!vertex) return;
+  //     // place vertex into visited object
+  //     visited[vertex] = true;
+  //     // push vertex into results array
+  //     results.push(vertex);
+  //     // loop over all values in adjacencyList for that vertex
+  //     for (let value of list[vertex]) {
+  //       // if any of the values not visited, recursively invoke the helper function
+  //       if (!visited[value]) helper(value);
+  //     }
+  //   }
+  //   helper(vertex);
+  //   return results;
+  // }
+
+  // iterative
   DFS(vertex) {
-    let list = this.adjacencyList;
-    // create a list to store end result
-    let results = [];
-    // create an object to store visited articles
-    let visited = {};
-    // helper function
-    function helper(vertex) {
-      // if vertex is empty, return
-      if (!vertex) return;
-      // place vertex into visited object
-      visited[vertex] = true;
-      // push vertex into results array
-      results.push(vertex);
-      // loop over all values in adjacencyList for that vertex
-      for (let value of list[vertex]) {
-        // if any of the values not visited, recursively invoke the helper function
-        if (!visited[value]) helper(value);
+    const list = this.adjacencyList;
+    // create a stack to keep track of vertices
+    const stack = [vertex];
+    // create a list to store the end result, to be returned at the very end
+    const results = [];
+    // create an object to store visited vertices
+    const visited = {};
+    // add starting vertex to stack and mark it visited
+    stack.push(...list[vertex]);
+    visited[vertex] = true;
+    results.push(vertex);
+    // while stack has something
+    while (stack) {
+      // pop the next vertex from stack
+      const popped = stack.pop();
+      if (!popped) break;
+      // if that vertex hasnt been visited
+      if (!visited[popped]) {
+        // mark it as visisted
+        visited[popped] = true;
+        // add to result list
+        results.push(popped);
+        // push all of its neighbours to stack
+        stack.push(...list[popped]);
       }
     }
-    helper(vertex);
+    // return result array
+    return results;
+  }
+
+  BFS(vertex) {
+    const list = this.adjacencyList;
+    // create a stack to keep track of vertices
+    const stack = [vertex];
+    // create a list to store the end result, to be returned at the very end
+    const results = [];
+    // create an object to store visited vertices
+    const visited = {};
+    // add starting vertex to stack and mark it visited
+    stack.push(...list[vertex]);
+    visited[vertex] = true;
+    results.push(vertex);
+    // while stack has something
+    while (stack) {
+      // pop the next vertex from stack
+      const popped = stack.shift();
+      if (!popped) break;
+      // if that vertex hasnt been visited
+      if (!visited[popped]) {
+        // mark it as visisted
+        visited[popped] = true;
+        // add to result list
+        results.push(popped);
+        // push all of its neighbours to stack
+        stack.push(...list[popped]);
+      }
+    }
+    // return result array
     return results;
   }
 }
@@ -77,5 +140,5 @@ g.addEdge("C", "E");
 g.addEdge("D", "E");
 g.addEdge("D", "F");
 g.addEdge("E", "F");
-console.log(g.DFS("A"));
+console.log(g.BFS("A"));
 // console.log(g);

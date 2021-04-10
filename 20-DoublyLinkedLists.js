@@ -197,6 +197,28 @@ class DLL {
 
   // ===== REMOVE =====
   // Remove item from index
+  remove(index) {
+    // if index is less than zero or greater than or equal to the length, return undefined
+    if (index < 0 || index >= this.length) return undefined;
+    // if index is 0, call UNSHIFT
+    if (index === 0) return this.unshift;
+    // if index is same as length-1, call POP
+    if (index === this.length - 1) return this.pop;
+    // otherwise, call GET to retrieve the item to be removed
+    const foundNode = this.get(index);
+    const prevNode = foundNode.prev;
+    const nextNode = foundNode.next;
+    // update next and prev propreties to remove the found node from list
+    prevNode.next = nextNode;
+    nextNode.prev = prevNode;
+    // set next and prev to null on the found node
+    foundNode.next = null;
+    foundNode.prev = null;
+    // decrement the length
+    this.length--
+    // return the removed node
+    return foundNode
+  }
 
   // ===== PRINT =====
   print() {
@@ -219,7 +241,7 @@ list.push("index 4");
 list.push("index 5");
 list.push("index 6");
 list.push("index 7");
-list.insert(2, "hi");
+list.remove(2)
 console.log("newPrevNode", list.get(1));
 console.log("newNode", list.get(2));
 console.log("newNextNode", list.get(3));

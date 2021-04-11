@@ -35,53 +35,62 @@ class WeightedGraph {
   }
 
   // Dijkstra
-  Dijkstra(startV, endV) {
+  Dijkstra(start, finish) {
     // distance object - set each key to be every vertex in the adjacency list with a value of infinity, except the starting vertex with value of 0
-    const distanceObj = {};
-    Object.keys(this.adjacencyList).map((key) => {
-      distanceObj[key] = Infinity;
-      if (key === startV) distanceObj[key] = 0;
-    });
+    const distances = {};
     // priority queue - add each vertex with priroity of Infinity to the PQ, except the starting vertex, which have priority of 0
-    const priorityQueue = new PQ();
-    Object.keys(this.adjacencyList).map((key) => {
-      if (key === startV) {
-        priorityQueue.enqueue(key, 0);
-      } else {
-        priorityQueue.enqueue(key, Infinity);
-      }
-    });
+    const nodes = new PQ();
     // previous object - set each key to be every vertex in adjacency list with value of null
-    const previousObject = {};
-    Object.keys(this.adjacencyList).map((key) => {
-      previousObject[key] = null;
-    });
-    // start looping as long as there is anything in PQ
-    while (priorityQueue.values) {
-      // dequeue a vertex from the PQ
-      const dequeuedVertex = priorityQueue.dequeue();
-      // if that vertex is the same as the ending vertex, return
-      if (dequeuedVertex.val === endV) return;
-      // otherwise, loop through each value in the adjacencyList at that vertex
-      for (const edge of this.adjacencyList[dequeuedVertex.val]) {
-        if (!dequeuedVertex.val) return;
-        // calculate the distance to that vertex from the starting vertex
-       function findDistance(vertex, weight) {
-        // check previousobject for previous vertex
-        let previous = previousObject[vertex]
-        // get from shortestDistance object, the matched vertex
-        let shortest = distanceObj[previous]
-        return findDistance(previous, shortest)
-        // return weight + findDistance
-       }
-        // if the distance is less than what is currently stored in our distances object
-        // updated the distances object with new lower distance
-        // update the previous ojbect to contain that vertex
-        // enqueue the vertex with the total distance from the start node
+    const previous = {};
+
+    let path = [];
+    let smallest;
+
+    // ====== SET STARTING VALUES =======
+    for (let vertex in this.adjacencyList) {
+      // for-in accesses objects
+      if (vertex === start) {
+        distances[vertex] = 0;
+        nodes.enqueue(vertex, 0);
+      } else {
+        distances[vertex] = Infinity;
+        nodes.enqueue(vertex, Infinity);
       }
+      previous[vertex] = null;
     }
 
-    return null;
+    // start looping as long as there is anything in PQ
+    while (nodes.values.length) {
+      // dequeue a vertex from the PQ
+      smallest = nodes.dequeue().val;
+      // if that vertex is the same as the ending vertex, return
+      if (smallest === finish) {
+        //done
+        while (previous[smallest]) {
+          path.push(smallest);
+          smallest = previous[smallest];
+        }
+        break;
+      }
+      // otherwise, loop through each value in the adjacencyList at that vertex
+      if (smallest || distances[smallest] !== Infinity) {
+        // get the neighbours
+        for (let neighbour of this.adjacencyList[smallest]) {
+          // calculate the distance to that vertex from the starting vertex
+          let candidate = distances[smallest] + neighbour.weight;
+          // if the distance is less than what is currently stored in our distances object
+          if (candidate < distances[neighbour.node]) {
+            // updated the distances object with new lower distance
+            distances[neighbour.node] = candidate;
+            // update the previous object to contain that vertex
+            previous[neighbour.node] = smallest;
+            // enqueue the vertex with the total distance from the start node
+            nodes.enqueue(neighbour.node, candidate);
+          }
+        }
+      }
+    }
+    return { path };
   }
 }
 
@@ -96,9 +105,9 @@ g.addEdge("A", "B", 4);
 g.addEdge("A", "C", 2);
 g.addEdge("B", "E", 3);
 g.addEdge("C", "D", 2);
-g.addEdge("D", "E", 2);
 g.addEdge("C", "F", 4);
+g.addEdge("D", "E", 3);
 g.addEdge("D", "F", 1);
 g.addEdge("E", "F", 1);
-// console.log(g)
-console.log(g.Dijkstra("A"));
+// console.log(g.adjacencyList);
+console.log(g.Dijkstra("A", "E"));

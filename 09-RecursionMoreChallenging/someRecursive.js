@@ -1,9 +1,10 @@
 const isOdd = val => val % 2 !== 0;
 
-function someRecursive([num, ...rest], isOdd) {
+function someRecursive([num, ...rest], cb) {
   if (!num) return
-  return isOdd(num) || someRecursive(rest)
+  return cb(num) || someRecursive(rest, cb) || false
 }
+
 
 someRecursive([1,2,3,4], isOdd) // true
 someRecursive([4,6,8,9], isOdd) // true

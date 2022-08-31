@@ -2,17 +2,12 @@
  * Implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. There can be negeative numbers in the array, but it will always be sorted.
  */
 
-module.exports = {
-  countUniqueValues,
-  countUniqueValuesNaive,
-};
-
 /**
  *
  * @param {Array<number>} array
  * @returns {number}
  */
-function countUniqueValuesNaive(array) {
+export function countUniqueValuesNaive(array: number[]): number {
   if (array.length === 0) return 0;
   if (array.length === 1) return 1;
   const obj = {};
@@ -25,7 +20,7 @@ function countUniqueValuesNaive(array) {
  * @param {Array<number>} arr
  * @returns {number}
  */
-function countUniqueValues(arr) {
+export function countUniqueValues(arr: number[]): number {
   if (arr.length === 0) return 0;
   if (arr.length === 1) return 1;
 

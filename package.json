@@ -1,0 +1,26 @@
+{
+  "name": "javascript-dsa-masterclass",
+  "version": "1.0.0",
+  "description": "Lesson notes and code base for JavaScript Algorithms and Data Structures Masterclass - https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass",
+  "main": "19-SinglyLinkedList.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chewhx/tutorial-js-algorithms-data-masterclass.git"
+  },
+  "keywords": [],
+  "author": "Chew Han Xiang <hello@chewhx.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chewhx/tutorial-js-algorithms-data-masterclass/issues"
+  },
+  "homepage": "https://github.com/chewhx/tutorial-js-algorithms-data-masterclass#readme",
+  "dependencies": {
+    "@types/jest": "^28.1.8",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.8.2"
+  }
+}

@@ -1,9 +1,9 @@
-/**
- * Write a function which takes two array, and check if the second array contains the square of every values in first array.
- * They should have the same number of elements. And the square number cannot used for the same value in first array
- */
+/* 
 
-module.exports = { same, sameNaive };
+Write a function which takes two array, and check if the second array contains the square of every values in first array.
+They should have the same number of elements. And the square number cannot used for the same value in first array
+
+*/
 
 /**
  * Naive solution
@@ -14,7 +14,7 @@ module.exports = { same, sameNaive };
  * @return {boolean}
  */
 
-function sameNaive(arr1, arr2) {
+export function sameNaive(arr1: number[], arr2: number[]): boolean {
   // Both arrays must have same lengths
   if (arr1.length !== arr2.length) {
     return false;
@@ -47,7 +47,7 @@ function sameNaive(arr1, arr2) {
  * @return {boolean}
  */
 
-function same(arr1, arr2) {
+export function same(arr1: number[], arr2: number[]): boolean {
   if (arr1.length !== arr2.length) {
     return false;
   }

@@ -13,7 +13,7 @@ module.exports = { validAnagram };
  * @param {string} str2
  * @returns {boolean}
  */
-function validAnagram(str1, str2) {
+export function validAnagram(str1: string, str2: string): boolean {
   // Both strings must have the same lengths
   if (str1.length !== str2.length) {
     return false;

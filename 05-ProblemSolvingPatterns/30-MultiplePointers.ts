@@ -3,8 +3,6 @@
  *
  */
 
-module.exports = { sumZeroNaive, sumZero };
-
 /**
  * Naive solution
  * As nested loops, O[n^2]
@@ -13,12 +11,12 @@ module.exports = { sumZeroNaive, sumZero };
  * @return {boolean}
  */
 
-function sumZeroNaive(array) {
+export function sumZeroNaive(array: number[]): [number, number] | undefined {
   // Loop through the array
   for (let index in array) {
-    const main = array[index];
+    const main = array[Number(index)];
     // Loop through th array from this index onwards
-    for (let i = index + 1; i < array.length; i++) {
+    for (let i = Number(index) + 1; i < array.length; i++) {
       // Check if current index value and second loop value sums up to zero
       if (main + array[i] === 0) {
         return [main, array[i]];
@@ -35,10 +33,10 @@ function sumZeroNaive(array) {
  * @return {boolean}
  */
 
-function sumZero(array) {
+export function sumZero(array: number[]): [number, number] | undefined {
   // Array length must be more than 2
   if (array.length < 2) {
-    return false;
+    return undefined;
   }
 
   // Left pointer and right pointer

@@ -7,10 +7,10 @@
  * @param  {number[]} args
  * @returns {boolean}
  */
-function areThereDuplicatesByFrequencyCounter(...args) {
+export function areThereDuplicatesByFrequencyCounter(...args: number[]) {
 	if (args.length < 1) return null;
 
-	const counter = {};
+	const counter: Record<number, number> = {};
 
 	for (let each of args) {
 		counter[each] = counter[each] + 1 || 1;
@@ -25,7 +25,7 @@ function areThereDuplicatesByFrequencyCounter(...args) {
  * @param  {number[]} args
  * @returns {boolean}
  */
-function areThereDuplicatesByMultiplePointers(...args) {
+export function areThereDuplicatesByMultiplePointers(...args: number[]) {
 	// Sort the array from small to large
 	const _args = args.sort((a, b) => a - b);
 	// Create a window that checks two values, a=0  and b=a+1
@@ -42,8 +42,3 @@ function areThereDuplicatesByMultiplePointers(...args) {
 
 	return false;
 }
-
-module.exports = {
-	areThereDuplicatesByFrequencyCounter,
-	areThereDuplicatesByMultiplePointers,
-};

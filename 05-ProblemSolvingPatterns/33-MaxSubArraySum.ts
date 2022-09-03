@@ -8,11 +8,11 @@
  * @param {number} n
  * @returns {number}
  */
-function maxSubarraySumNaive(array, n) {
+export function maxSubarraySumNaive(array: number[], n: number): number | null {
 	if (array.length < n) return null;
 
-	let max = -Infinity;
-	let temp;
+	let max: number = -Infinity;
+	let temp: number;
 
 	for (let i = 0; i < array.length - n + 1; i++) {
 		temp = 0;
@@ -35,7 +35,7 @@ function maxSubarraySumNaive(array, n) {
  * @returns {number | null}
  */
 
-function maxSubarraySum(array, n) {
+export function maxSubarraySum(array: number[], n: number): number | null {
 	// If array has no values, return null
 	if (array.length < n) return null;
 
@@ -71,5 +71,3 @@ function maxSubarraySum(array, n) {
 	// Return the max number
 	return max;
 }
-
-module.exports = { maxSubarraySumNaive, maxSubarraySum };

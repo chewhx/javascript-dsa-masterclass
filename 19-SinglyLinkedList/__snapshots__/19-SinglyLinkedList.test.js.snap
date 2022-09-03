@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`19-SinglyLinkedList Can pop values 1`] = `
+Object {
+  "next": null,
+  "value": 7,
+}
+`;

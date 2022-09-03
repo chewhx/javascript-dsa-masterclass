@@ -8,7 +8,7 @@
  * @param {number} target
  * @returns {boolean}
  */
-function averagePair(array, target) {
+export function averagePair(array: number[], target: number): boolean {
 	// If array length is less than 2, return false - not possible for find average
 	if (array.length < 2) return false;
 
@@ -30,5 +30,3 @@ function averagePair(array, target) {
 	// Otherwise, return false
 	return false;
 }
-
-module.exports = { averagePair };
